@@ -1,8 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-MIN_CONNECTIONS_FOR_SHARE_COMPARISON = 500
-
 # ====================================================
 # 1. Load data
 # ====================================================
@@ -330,21 +328,24 @@ ranking_comparison["rank_change"] = (
 
 
 print("\nRaw and household-normalized ranking comparison:")
+ranking_display = ranking_comparison[
+    [
+        "local_authority",
+        "total_lct",
+        "raw_rank",
+        "lct_per_1000_households",
+        "household_rank",
+        "rank_change",
+    ]
+].copy()
+
+ranking_display["lct_per_1000_households"] = (
+    ranking_display["lct_per_1000_households"].round(2)
+)
 
 print(
-    ranking_comparison[
-        [
-            "local_authority",
-            "total_lct",
-            "raw_rank",
-            "lct_per_1000_households",
-            "household_rank",
-            "rank_change",
-        ]
-    ]
-    .sort_values(
-        "household_rank"
-    )
+    ranking_display
+    .sort_values("household_rank")
     .head(10)
 )
 
@@ -565,48 +566,12 @@ technology_leaders = pd.concat(
     technology_ranking_tables,
     ignore_index=True,
 )
-
-# Reshape the results so each technology has its own pair of columns.
-technology_leaders_wide = technology_leaders.pivot(
-    index="technology_rank",
-    columns="technology",
-    values=[
-        "local_authority",
-        "connections_per_1000_households",
-    ],
+# Round to 2 decimals.
+technology_leaders["connections_per_1000_households"] = (
+    technology_leaders[
+        "connections_per_1000_households"
+    ].round(2)
 )
-
-# Reorder the column levels so each technology's borough and rate
-# appear next to each other.
-technology_leaders_wide = technology_leaders_wide.swaplevel(
-    0,
-    1,
-    axis=1,
-)
-
-# Keep technologies in the same order used in the analysis.
-technology_order = [
-    "Solar PV",
-    "EV Charging Points",
-    "Battery Storage",
-    "Heat Pumps",
-]
-
-technology_leaders_wide = technology_leaders_wide.reindex(
-    columns=technology_order,
-    level=0,
-)
-
-# Rename the two repeated subcolumns to shorter labels.
-technology_leaders_wide = technology_leaders_wide.rename(
-    columns={
-        "local_authority": "Borough",
-        "connections_per_1000_households": "Rate",
-    },
-    level=1,
-)
-
-technology_leaders_wide.index.name = "Rank"
 
 print("\nTop boroughs by normalised technology connections:")
 
