@@ -157,11 +157,23 @@ This demonstrates that borough size has a meaningful effect on rankings based on
 
 ## Visualisations
 
-The analysis produces three main figures:
+### London connections by technology
 
-1. Total London connections by technology
-2. Top ten boroughs by raw total compared with connections per 1,000 households
-3. Leading boroughs for Solar PV, EV charging points, battery storage, and heat pumps
+Solar PV and EV charging points account for most recorded low-carbon technology connections across London.
+
+![London connections by technology](images/london_connections_by_technology.png)
+
+### Raw totals compared with household-normalised rates
+
+Bromley leads by raw connection volume, while Havering leads after adjusting for the number of households.
+
+![Raw versus household-normalised borough rankings](images/raw_vs_normalised_rankings.png)
+
+### Technology leaders by borough
+
+Different boroughs lead different technologies after normalising connections by household numbers.
+
+![Leading boroughs by low-carbon technology](images/technology_leaders_by_household.png)
 
 ## Tools and libraries
 

@@ -245,6 +245,14 @@ ax.set_xlabel("Total Recorded Connections")
 ax.set_ylabel("Technology")
 
 plt.tight_layout()
+
+# Save chart as PNG
+# fig.savefig(
+#     "images/london_connections_by_technology.png",
+#     dpi=300,
+#     bbox_inches="tight",
+# )
+
 plt.show()
 
 # Identify the borough with the highest absolute number of connections for each technology.
@@ -441,6 +449,14 @@ fig.suptitle(
 )
 
 plt.tight_layout()
+
+# Save chart as PNG
+# fig.savefig(
+#     "images/raw_vs_normalised_rankings.png",
+#     dpi=300,
+#     bbox_inches="tight",
+# )
+
 plt.show()
 
 
@@ -673,5 +689,12 @@ fig.suptitle(
 plt.tight_layout(
     rect=[0, 0, 1, 0.96]
 )
+
+# Save chart as PNG
+# fig.savefig(
+#     "images/technology_leaders_by_household.png",
+#     dpi=300,
+#     bbox_inches="tight",
+# )
 
 plt.show()
